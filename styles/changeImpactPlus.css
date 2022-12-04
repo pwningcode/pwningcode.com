@@ -1,0 +1,69 @@
+:root {
+    --cip-primary: #fff;
+    --cip-secondary: #fff;
+    --cip-sub: #fff;
+    /* --cip-primary: #223b74; */
+    /* --cip-secondary: #989898; */
+    /* --cip-sub: #231f20; */
+}
+
+#changeImpactPlus {
+    max-width: 500px;
+}
+
+.changeImpactPlus-1 {
+    fill: none;
+    stroke: var(--cip-primary);
+    stroke-miterlimit: 10;
+    stroke-width: 4.08px;
+}
+
+.changeImpactPlus-2 {
+    fill: var(--cip-primary);
+}
+
+.changeImpactPlus-3 {
+    fill: var(--cip-secondary);
+}
+
+.changeImpactPlus-4,
+.changeImpactPlus-6 {
+    font-size: 48px;
+}
+
+.changeImpactPlus-4,
+.changeImpactPlus-7 {
+    fill: var(--cip-primary);
+}
+
+.changeImpactPlus-4,
+.changeImpactPlus-6,
+.changeImpactPlus-7,
+.changeImpactPlus-8,
+.changeImpactPlus-9 {
+    font-family: Futura-Medium, Futura;
+    font-weight: 500;
+}
+
+.changeImpactPlus-5 {
+    letter-spacing: 0.01em;
+}
+
+.changeImpactPlus-6,
+.changeImpactPlus-8 {
+    fill: var(--cip-secondary);
+}
+
+.changeImpactPlus-7,
+.changeImpactPlus-8 {
+    font-size: 24px;
+}
+
+.changeImpactPlus-9 {
+    font-size: 12px;
+    fill: var(--cip-sub);
+}
+
+.changeImpactPlus-10 {
+    letter-spacing: -0.02em;
+}
