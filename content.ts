@@ -196,7 +196,7 @@ export const content = {
 		items: [
 			{
 				id: 1,
-				title: `Web Starter`,
+				title: `Web Starter - Perfect for Startups`,
 				description: `Landing, Contact Form, About, Privacy, Terms, and 3 additional pages.`,
 				cost: '$1,000',
 				icons: [{ icon: mdiWeb, color: '#f6f6f6' }],
@@ -250,6 +250,11 @@ export const content = {
 		description: ``,
 		items: [
 			{
+				question: 'Do you only sell subscriptions?',
+				answer: `I do offer fixed pricing for well scoped projects. Schedule an introduction below and let's talk about it`,
+				size: 24,
+			},
+			{
 				question: 'Why not hire a full time developer?',
 				answer: 'The average salary for a senior full stack engineer exceeds $100,000 before benefits.  With a monthly subscription you will save thousands and can pause your subscription at any time.',
 				size: 24,
@@ -277,7 +282,7 @@ export const content = {
 			},
 			{
 				question: `What if I'm unsatisfied? Can I get a refund?`,
-				answer: 'Due to the nature of development and the up-front investment and commitment required, there are no refunds.  I recommend signing up for a plan that has less commitment and upgrade later. And you are always welcome to cancel your membership at any time.',
+				answer: 'Due to the nature of development and the up-front investment and commitment required, there are no refunds.  I recommend signing up for a plan that has less commitment and upgrade later. And you are always welcome to pause your membership at any time.',
 				size: 24,
 			},
 			{
