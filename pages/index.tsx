@@ -42,9 +42,9 @@ export default function HomePage() {
 				/>
 				<meta
 					property="og:image:secure_url"
-					content="https:/pwningcode.com/photo2.png"
+					content="https:/pwningcode.com/photo2.jpg"
 				/>
-				<meta property="og:image:type" content="png" />
+				<meta property="og:image:type" content="jpg" />
 				<meta property="og:image:width" content="300" />
 				<meta property="og:image:height" content="329" />
 
@@ -55,8 +55,10 @@ export default function HomePage() {
 				/>
 				<meta
 					property="twitter:image"
-					content="https:/pwningcode.com/photo2.png"
+					content="https:/pwningcode.com/photo2.jpg"
 				/>
+				<meta property="twitter:image:width" content="300" />
+				<meta property="twitter:image:height" content="329" />
 				<meta
 					property="twitter:title"
 					content="PwningCode - Jason Barnes - Software Developer"
