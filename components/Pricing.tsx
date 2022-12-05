@@ -45,7 +45,7 @@ export default function Pricing() {
 									{item.options.map((option, index) => (
 										<li
 											key={`${item.id}_${index}`}
-											className="flex items-center mb-3 text-coolGray-500 font-medium"
+											className="flex items-center mb-3 text-coolGray-900 font-medium"
 										>
 											<Image
 												className="mr-3"

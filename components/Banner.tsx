@@ -75,7 +75,7 @@ export default function Banner() {
 				</div>
 			</div>
 			<div className="md:absolute md:top-0 md:right-0 md:w-1/2 md:h-full md:pl-4">
-				<div className="flex items-center justify-center h-full px-8 py-14 bg-green-700">
+				<div className="flex items-center justify-center h-full px-8 py-14 bg-green-800">
 					{testimonials.map((quote, index) => (
 						<div
 							key={quote.title}
