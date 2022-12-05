@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import * as React from 'react';
 import Image from 'next/image';
 import { content } from '../content';
@@ -31,7 +32,7 @@ export default function Banner() {
 					<div className="max-w-sm mx-auto">
 						<div className="mb-6 text-center">
 							<div className="inline-block mb-6">
-								<Image
+								<img
 									src="/photo2.png"
 									alt="logo"
 									width={300}
