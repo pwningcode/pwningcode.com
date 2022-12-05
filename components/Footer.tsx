@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { content } from '../content';
+const { footer } = content;
 
 export default function Footer() {
 	return (
@@ -12,16 +14,15 @@ export default function Footer() {
 		>
 			<div className="container px-4 mx-auto pt-2">
 				<h3 className="text-2xl font-semibold text-coolGray-100 mb-4 text-center">
-					Contact Me
+					{footer.title}
 				</h3>
 				<p className="text-lg text-coolGray-300 mb-12 text-center">
-					Let&apos;s schedule an introduction and see if we are a good
-					fit.
+					{footer.description}
 				</p>
 				<div className="flex flex-wrap justify-center">
 					<div className="w-full lg:w-1/3 px-4 py-4 flex flex-col justify-center items-center rounded-lg bg-darkCoolGray-600 m-2">
 						<h3 className="text-2xl font-semibold text-coolGray-100 mb-4 pt-4">
-							Leave a Message
+							{footer.message}
 						</h3>
 						<a
 							className="w-1/2 m-auto py-4 px-6 text-lg leading-6 flex flex-col justify-center items-center font-medium rounded-md opacity-100"
@@ -65,7 +66,7 @@ export default function Footer() {
 					</div>
 					<div className="w-full lg:w-1/3 px-4 py-4 pb-10 flex flex-col justify-center items-center rounded-lg bg-darkCoolGray-600 m-2">
 						<h3 className="text-2xl font-semibold text-coolGray-100 mb-8 pt-4 whitespace-nowrap">
-							Add me to your calendar
+							{footer.calendar}
 						</h3>
 						<a
 							href="https://calendly.com/pwningcode/introduction"
@@ -79,7 +80,7 @@ export default function Footer() {
 				</div>
 				<div className="w-full px-4 py-4 mt-20 border-t-2 border-coolGray-700">
 					<p className="mb-9 leading-9 text-white text-sm text-center">
-						© Jason A Barnes, Member,{' '}
+						© Jason Barnes, Member,{' '}
 						<a href="https://fvcsolutions.com">
 							Future Vision Concepts, LLC.
 						</a>

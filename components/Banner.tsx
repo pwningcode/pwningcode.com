@@ -1,32 +1,14 @@
 import * as React from 'react';
 import Image from 'next/image';
+import { content } from '../content';
 
-const quotes = [
-	{
-		title: 'Jim Canterucci',
-		sub: 'Founder, Constituent Hub, LLC',
-		quote: 'Jason is a treasure. Most IT professionals speak/think a different language. Jason however can translate technical concepts into a business perspective. He has built numerous systems for our organization, always pushing the boundaries of the technology successfully.',
-		avatar: '/canterucci.jpeg',
-	},
-	{
-		title: 'Tony Zimmerman',
-		sub: 'Director of Data at Select Sires Inc.',
-		quote: 'Jason is a proven leader in all aspects of application design and development. He is truly an asset to his peers and colleagues. I would recommend him for any cutting edge development effort.',
-		avatar: '/zimmerman.jpeg',
-	},
-	{
-		title: 'Karl Sant',
-		sub: 'Operations Manager, Thompson Building Associates',
-		quote: 'has been working on our software development for around a year now and we have had a great experience working with them on our mobile site for our database.',
-		avatar: '/tba.jpg',
-	},
-];
+const { banner, testimonials } = content;
 
 export default function Banner() {
 	const [selected, setSelected] = React.useState(0);
 	React.useEffect(() => {
 		const interval = setInterval(() => {
-			if (selected === quotes.length - 1) {
+			if (selected === testimonials.length - 1) {
 				setSelected(0);
 			} else {
 				setSelected(selected + 1);
@@ -60,13 +42,12 @@ export default function Banner() {
 								/>
 							</a>
 							<h3 className="mb-4 text-2xl md:text-3xl font-bold text-white">
-								A proven full-stack developer
+								{banner.title}
 							</h3>
 							<p className="text-lg text-coolGray-400 font-medium">
-								Requirements, Design, Development, Web, Mobile,
-								and Infrastructure
+								{banner.description}
 							</p>
-							<p className="mt-12">
+							<p className="mt-4">
 								{/* <a
 									className="inline-block m-2 rounded-md bg-darkCoolGray-500 py-2 px-4 text-sm font-medium leading-5 text-green-50 hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
 									href="#pricing"
@@ -86,7 +67,7 @@ export default function Banner() {
 									CV
 								</a> */}
 								<a
-									className="inline-block m-2 rounded-md bg-green-500 py-2 px-4 text-sm font-medium leading-5 text-green-50 hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+									className="inline-block m-2 rounded-md bg-green-500 py-4 px-6 text-sm font-medium leading-5 text-green-50 hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
 									href="#pricing"
 								>
 									Hire Me
@@ -98,7 +79,7 @@ export default function Banner() {
 			</div>
 			<div className="md:absolute md:top-0 md:right-0 md:w-1/2 md:h-full md:pl-4">
 				<div className="flex items-center justify-center h-full px-8 py-14 bg-green-500">
-					{quotes.map((quote, index) => (
+					{testimonials.map((quote, index) => (
 						<div
 							key={quote.title}
 							className={`relative h-screen pt-24 left-0 right-0 md:max-w-xl mx-auto text-center ease-out transition-all duration-1000 ${

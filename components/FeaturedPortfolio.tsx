@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import * as React from 'react';
 import ChangeImpactPlus from './svgs/ChangeImpactPlus';
+import { content } from '../content';
+const { recent } = content;
 
 export default function FeaturedPortfolio() {
 	return (
@@ -17,13 +19,10 @@ export default function FeaturedPortfolio() {
 						<div className="w-full lg:w-1/2 px-4 mb-10">
 							<div className="max-w-md">
 								<h3 className="mb-8 text-4xl md:text-5xl text-white font-bold tracking-tighter">
-									Recent Projects
+									{recent.title}
 								</h3>
 								<p className="text-lg md:text-xl text-coolGray-400 font-medium">
-									Receive professional level design and
-									development regardless if you are a new
-									startup, a small businesses, or an
-									individual.
+									{recent.description}
 								</p>
 							</div>
 						</div>

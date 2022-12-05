@@ -1,43 +1,6 @@
 import * as React from 'react';
-
-const questions = [
-	{
-		question: 'Why not hire a full time developer?',
-		answer: 'The average salary for a senior full stack engineer exceeds $100,000 before benefits.  With a monthly subscription you will save thousands and can pause your subscription at any time.',
-		size: 24,
-	},
-	{
-		question: 'Why does development take so long?',
-		answer: `It doesn't have to.  Proper planning, design, and experience will save months or even years in development time and costs.  I will work with you to ensure development is as speedy as possible and that we find a process to work efficiently together.`,
-		size: 24,
-	},
-	{
-		question: 'Are you insured and/or incorporated?',
-		answer: `Yes. I am 50% owner of Future Vision Concepts, LLC.  A software consulting firm established in 1999. All billing and contractual agreements will be through this business. COI's available upon request.`,
-		size: 24,
-	},
-	{
-		question: 'How much time do I get with my subscription?',
-		answer: `You're welcome to think in terms of time if you wish. I would charge $100/hour if I billed by time. Take your subscription in mind and divide by $100/hour. There is not a lot of development that can be done in 12 hours per week. In my experience, billing for time turns out to be much more expensive to my customers and less efficient for me.  I do not like tracking my time. I do whatever needs to be done as efficiently as I can and bring all my experience to the table. You will always receive more value than if I were to bill by the hour.`,
-		size: 24,
-	},
-	{
-		question:
-			'How can you provide development to several subscribers at once?',
-		answer: `I limit new sales and I review my allocation consistently every month. I look at current and future project requirements and communicate with all my customers about their goals.  I am building customer relationships slowly over time to ensure that every customer's expectations are met.`,
-		size: 24,
-	},
-	{
-		question: `What if I'm unsatisfied? Can I get a refund?`,
-		answer: 'Due to the nature of development and the up-front investment and commitment required, there are no refunds.  I recommend signing up for a plan that has less commitment and upgrade later. And you are always welcome to cancel your membership at any time.',
-		size: 24,
-	},
-	{
-		question: `What happens to any code, designs, and other artifacts if I cancel my subscription?`,
-		answer: 'Your data and IP is yours. I always recommend setting up any infrastructure and accounts under your own name.  You can give me less privileged access and revoke my access at anytime.  All code will be maintained in source control (usually GitHub or AWS CodeCommit) on your account.  Any other designs and artifacts will be shared with you.',
-		size: 24,
-	},
-];
+import { content } from '../content';
+const { faq } = content;
 
 export default function Questions() {
 	const [selected, setSelected] = React.useState<Record<number, boolean>>({});
@@ -58,11 +21,11 @@ export default function Questions() {
 			<div className="container px-4 mx-auto">
 				<div className="max-w-4xl mx-auto text-center">
 					<h2 className="mb-20 text-4xl md:text-5xl leading-tight text-coolGray-900 font-bold tracking-tighter">
-						Frequently Asked Questions
+						{faq.title}
 					</h2>
 				</div>
 				<div className="max-w-4xl mx-auto">
-					{questions.map((item, index) => (
+					{faq.items.map((item, index) => (
 						<a
 							key={item.question}
 							className="flex flex-wrap w-full p-6 mb-8 text-coolGray-300 hover:text-coolGray-400 bg-coolGray-50 text-left border border-transparent hover:border-coolGray-200 rounded-md shadow-lg transition duration-200 cursor-pointer"

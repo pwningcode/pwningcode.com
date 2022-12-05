@@ -1,68 +1,8 @@
 // Icons
 import Icon from '@mdi/react';
-import {
-	mdiApple,
-	mdiWeb,
-	mdiLanguageMarkdownOutline,
-	mdiDatabaseOutline,
-	mdiCreditCardOutline,
-	mdiAccount,
-	mdiMicrosoft,
-	mdiLinux,
-	mdiAndroid,
-} from '@mdi/js';
 
-const items = [
-	{
-		id: 1,
-		title: `Web Starter`,
-		description: `Landing, Contact Form, About, Privacy, Terms, and 3 additional pages.`,
-		cost: '$1,000',
-		icons: [{ icon: mdiWeb, color: '#f6f6f6' }],
-	},
-	{
-		id: 2,
-		title: `Blog Starter`,
-		description: `Web Starter + Headless CMS integration`,
-		cost: '$1,500',
-		icons: [
-			{ icon: mdiWeb, color: '#f6f6f6' },
-			{ icon: mdiLanguageMarkdownOutline, color: '#f6f6f6' },
-		],
-	},
-	{
-		id: 3,
-		title: `Mobile Starter`,
-		description: `iOS & Android: Navigation, User Authentication, Profile Page, and 3 views`,
-		cost: '$2,500',
-		icons: [
-			{ icon: mdiApple, color: '#f6f6f6' },
-			{ icon: mdiAndroid, color: '#f6f6f6' },
-		],
-	},
-	{
-		id: 4,
-		title: `Desktop Starter`,
-		description: `OS Integration, Navigation, User Authentication, Profile Page, and 3 views`,
-		cost: '$2,500',
-		icons: [
-			{ icon: mdiApple, color: '#f6f6f6' },
-			{ icon: mdiMicrosoft, color: '#f6f6f6' },
-			{ icon: mdiLinux, color: '#f6f6f6' },
-		],
-	},
-	{
-		id: 5,
-		title: `SaaS Starter`,
-		description: `Web Starter + User Authentication, Profile Page, Stripe Integration.`,
-		cost: '$2,500',
-		icons: [
-			{ icon: mdiAccount, color: '#f6f6f6' },
-			{ icon: mdiDatabaseOutline, color: '#f6f6f6' },
-			{ icon: mdiCreditCardOutline, color: '#f6f6f6' },
-		],
-	},
-];
+import { content } from '../content';
+const { productTable } = content;
 
 export default function ProductTable() {
 	return (
@@ -76,13 +16,13 @@ export default function ProductTable() {
 			<div className="container px-4 mx-auto">
 				<div className="max-w-4xl mx-auto mb-8 text-center">
 					<h3 className="mb-4 text-3xl md:text-4xl leading-tight text-white font-medium tracking-tighter">
-						Starter Templates
+						{productTable.title}
 					</h3>
 					<p className="text-lg md:text-xl text-coolGray-400 font-medium">
-						Templates based on past experience to get you started.
+						{productTable.description}
 					</p>
 				</div>
-				{items.map((item) => (
+				{productTable.items.map((item) => (
 					<div
 						key={item.id}
 						className="flex flex-wrap items-center p-7 px-10 bg-coolGray-800 rounded-md my-2"
