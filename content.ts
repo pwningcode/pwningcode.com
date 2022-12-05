@@ -116,7 +116,7 @@ export const content = {
 			{
 				id: 5,
 				title: `Infrastructure`,
-				description: `Find and implement the right platforms and technologies to get the job done and scale your business.`,
+				description: `Find and implement the right platforms and technologies to get the job done.`,
 				icon: mdiServerNetwork,
 			},
 			{
@@ -129,7 +129,7 @@ export const content = {
 	},
 	technologies: {
 		title: `Technologies`,
-		description: `These are the technologies where I am most proficient and you will receive the most value. Ask me about other technologies.`,
+		description: `These are the technologies where I am most proficient and you will receive the most value.`,
 		items: [
 			{
 				id: 1,
