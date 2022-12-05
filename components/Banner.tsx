@@ -37,6 +37,7 @@ export default function Banner() {
 									width={300}
 									height={329}
 									className="rounded-lg"
+									loading="eager"
 									style={{
 										boxShadow: '0 0 20px 20px #000 inset',
 									}}
