@@ -32,9 +32,9 @@ export default function Technologies() {
 								<div className="inline-flex h-16 w-16 mb-6 mx-auto items-center justify-center text-coolGray-800 bg-green-500 rounded-lg">
 									<Icon path={item.icon} size={1} />
 								</div>
-								<h3 className="mb-4 text-xl md:text-2xl leading-tight text-white font-bold">
+								<h2 className="mb-4 text-xl md:text-2xl leading-tight text-white font-bold">
 									{item.title}
-								</h3>
+								</h2>
 								<p className="text-coolGray-400 font-medium">
 									{item.description}
 								</p>

@@ -2,6 +2,7 @@
 import Icon from '@mdi/react';
 
 import { content } from '../content';
+import Button from './Button';
 const { productTable } = content;
 
 export default function ProductTable() {
@@ -57,12 +58,7 @@ export default function ProductTable() {
 					</div>
 				))}
 				<div className="w-full text-center pt-8">
-					<a
-						className="inline-block py-3 px-7 w-full md:w-auto text-lg leading-8 text-green-50 font-medium text-center bg-green-500 hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 rounded-md shadow-sm"
-						href="#footer"
-					>
-						Get Started
-					</a>
+					<Button text="Get Started" url="#footer" />
 				</div>
 			</div>
 		</section>

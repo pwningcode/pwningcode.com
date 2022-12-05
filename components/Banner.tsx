@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Image from 'next/image';
 import { content } from '../content';
+import Button from './Button';
 
 const { banner, testimonials } = content;
 
@@ -29,7 +30,7 @@ export default function Banner() {
 				<div className="w-full md:w-1/2 md:pr-8">
 					<div className="max-w-sm mx-auto">
 						<div className="mb-6 text-center">
-							<a className="inline-block mb-6" href="#">
+							<div className="inline-block mb-6">
 								<Image
 									src="/photo.png"
 									alt="logo"
@@ -40,7 +41,7 @@ export default function Banner() {
 										boxShadow: '0 0 20px 20px #000 inset',
 									}}
 								/>
-							</a>
+							</div>
 							<h3 className="mb-4 text-2xl md:text-3xl font-bold text-white">
 								{banner.title}
 							</h3>
@@ -66,12 +67,7 @@ export default function Banner() {
 								>
 									CV
 								</a> */}
-								<a
-									className="inline-block m-2 rounded-md bg-green-500 py-4 px-6 text-sm font-medium leading-5 text-green-50 hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
-									href="#pricing"
-								>
-									Hire Me
-								</a>
+								<Button text="Hire Me" url="#pricing" />
 							</p>
 						</div>
 					</div>
@@ -92,14 +88,14 @@ export default function Banner() {
 								<Image
 									className="absolute -top-10 left-0 2xl:-left-12"
 									src="/assets/quote-top-green.svg"
-									alt=""
+									alt="The opening quote symbol"
 									width={142}
 									height={98}
 								/>
 								<Image
 									className="absolute -bottom-16 right-0"
 									src="/assets/quote-down-green.svg"
-									alt=""
+									alt="The closing quote symbol"
 									width={142}
 									height={98}
 								/>
@@ -122,29 +118,35 @@ export default function Banner() {
 									{quote.sub}
 								</span>
 								<div className="flex items-center justify-center">
-									<a
+									<div
 										className={`w-6 h-6 mr-6 rounded-full cursor-pointer ${
 											selected === 0
 												? 'bg-white'
 												: 'bg-green-600'
 										}`}
 										onClick={() => setSelected(0)}
+										title="First Testimonial"
+										aria-label="First Testimonial"
 									/>
-									<a
+									<div
 										className={`w-6 h-6 mr-6 rounded-full cursor-pointer ${
 											selected === 1
 												? 'bg-white'
 												: 'bg-green-600'
 										}`}
 										onClick={() => setSelected(1)}
+										title="Second Testimonial"
+										aria-label="Second Testimonial"
 									/>
-									<a
+									<div
 										className={`w-6 h-6 mr-6 rounded-full cursor-pointer ${
 											selected === 2
 												? 'bg-white'
 												: 'bg-green-600'
 										}`}
 										onClick={() => setSelected(2)}
+										title="Third Testimonial"
+										aria-label="Third Testimonial"
 									/>
 								</div>
 							</div>

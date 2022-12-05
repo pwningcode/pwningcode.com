@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { content } from '../content';
+import Button from './Button';
 const { footer } = content;
 
 export default function Footer() {
@@ -28,6 +29,8 @@ export default function Footer() {
 							className="w-1/2 m-auto py-4 px-6 text-lg leading-6 flex flex-col justify-center items-center font-medium rounded-md opacity-100"
 							href="https://mastodonian.online/@pwningcode"
 							rel="me"
+							title="Link to Mastodon"
+							aria-label="Link to Mastodon"
 						>
 							<svg
 								width="200"
@@ -68,20 +71,22 @@ export default function Footer() {
 						<h3 className="text-2xl font-semibold text-coolGray-100 mb-8 pt-4 whitespace-nowrap">
 							{footer.calendar}
 						</h3>
-						<a
-							href="https://calendly.com/pwningcode/introduction"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="w-1/2 m-auto py-4 px-6 text-lg leading-6 flex flex-col justify-center items-center text-coolGray-50 font-medium bg-green-500 hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 rounded-md shadow-sm opacity-100 whitespace-nowrap"
-						>
-							Schedule Now
-						</a>
+
+						<Button
+							text="Schedule Now"
+							url="https://calendly.com/pwningcode/introduction"
+							blank
+						/>
 					</div>
 				</div>
 				<div className="w-full px-4 py-4 mt-20 border-t-2 border-coolGray-700">
 					<p className="mb-9 leading-9 text-white text-sm text-center">
 						© Jason Barnes, Member,{' '}
-						<a href="https://fvcsolutions.com">
+						<a
+							href="https://fvcsolutions.com"
+							title="Link to Future Vision Concepts"
+							aria-label="Link to Future Vision Concepts"
+						>
 							Future Vision Concepts, LLC.
 						</a>
 					</p>

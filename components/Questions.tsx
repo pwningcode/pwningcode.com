@@ -28,8 +28,12 @@ export default function Questions() {
 					{faq.items.map((item, index) => (
 						<a
 							key={item.question}
+							id={`q${index}`}
+							href={`#q${index}`}
 							className="flex flex-wrap w-full p-6 mb-8 text-coolGray-300 hover:text-coolGray-400 bg-coolGray-50 text-left border border-transparent hover:border-coolGray-200 rounded-md shadow-lg transition duration-200 cursor-pointer"
 							onClick={() => toggle(index, !selected[index])}
+							title="Expand/Collapse"
+							aria-label="Expand/Collapse"
 						>
 							<div className="w-full md:w-3/4 lg:w-auto lg:pr-10">
 								<h3 className="mb-4 text-xl text-coolGray-900 font-bold">

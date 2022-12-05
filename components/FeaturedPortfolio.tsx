@@ -34,7 +34,7 @@ export default function FeaturedPortfolio() {
 											src="/projects/accent.png"
 											width="450"
 											height="86"
-											alt=""
+											alt="Logo for Accent Communications"
 										/>
 									</div>
 								</div>
@@ -49,7 +49,7 @@ export default function FeaturedPortfolio() {
 											src="/projects/talesto.svg"
 											width="64"
 											height="64"
-											alt=""
+											alt="Logo for Talesto"
 											style={{ fill: 'white' }}
 										/>
 										<span className="text-coolGray-50 p-4 text-3xl italic tracking-wide antialiased font-medium">
@@ -63,7 +63,7 @@ export default function FeaturedPortfolio() {
 											src="/projects/tba.png"
 											width="250"
 											height="64"
-											alt=""
+											alt="Logo for Thompson Building Associates"
 										/>
 									</div>
 								</div>

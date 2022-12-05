@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { content } from '../content';
+import Button from './Button';
 const { pricing } = content;
 
 export default function Pricing() {
@@ -57,12 +58,7 @@ export default function Pricing() {
 										</li>
 									))}
 								</ul>
-								<a
-									className="inline-block py-3 px-7 w-full text-gray-200 font-medium text-center bg-green-500 rounded-md shadow-sm"
-									href="#footer"
-								>
-									Get Started
-								</a>
+								<Button text="Get Started" url="#footer" />
 							</div>
 						</div>
 					))}

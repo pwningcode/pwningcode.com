@@ -31,6 +31,8 @@ export default function ScrollUp({ id, distance = 1000 }: Props) {
 			className={`fixed bottom-4 right-4 bg-coolGray-900 rounded-full p-3 md:p-1 transition-all delay-300 ${
 				show ? 'opacity-100' : 'opacity-0'
 			}`}
+			title="Go to top of page"
+			aria-label="Go to top of page"
 		>
 			<Icon
 				path={mdiArrowUpBold}
