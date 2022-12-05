@@ -133,7 +133,7 @@ export const content = {
 		items: [
 			{
 				id: 1,
-				title: `Font End`,
+				title: `Front End`,
 				description: `ReactJS, React Native, TailwindCSS, Material UI`,
 				icon: mdiReact,
 			},
@@ -191,20 +191,20 @@ export const content = {
 		],
 	},
 	productTable: {
-		title: `Starter Templates`,
+		title: `Starter Projects`,
 		description: `Templates based on past experience to get you started.`,
 		items: [
 			{
 				id: 1,
 				title: `Web Starter - Perfect for Startups`,
-				description: `Landing, Contact Form, About, Privacy, Terms, and 3 additional pages.`,
+				description: `Landing, About, Privacy, Terms, and one contact integration hosted on Vercel.com`,
 				cost: '$1,000',
 				icons: [{ icon: mdiWeb, color: '#f6f6f6' }],
 			},
 			{
 				id: 2,
 				title: `Blog Starter`,
-				description: `Web Starter + Headless CMS integration`,
+				description: `Web Starter + Headless CMS integration on Vercel.com`,
 				cost: '$1,500',
 				icons: [
 					{ icon: mdiWeb, color: '#f6f6f6' },
@@ -235,7 +235,7 @@ export const content = {
 			{
 				id: 5,
 				title: `SaaS Starter`,
-				description: `Web Starter + User Authentication, Profile Page, Stripe Integration.`,
+				description: `Web Starter + User Authentication, Profile Page, Stripe Integration on Vercel.com`,
 				cost: '$2,500',
 				icons: [
 					{ icon: mdiAccount, color: '#f6f6f6' },

@@ -56,8 +56,8 @@ export default function HomePage() {
 			<Benefits />
 			<Products />
 			<Technologies />
-			<Pricing />
 			<ProductTable />
+			<Pricing />
 			<Questions />
 			<Footer />
 			<ScrollUp id="banner" />
