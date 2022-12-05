@@ -32,7 +32,7 @@ export default function Banner() {
 						<div className="mb-6 text-center">
 							<div className="inline-block mb-6">
 								<Image
-									src="/photo.png"
+									src="/photo2.png"
 									alt="logo"
 									width={300}
 									height={329}
@@ -74,7 +74,7 @@ export default function Banner() {
 				</div>
 			</div>
 			<div className="md:absolute md:top-0 md:right-0 md:w-1/2 md:h-full md:pl-4">
-				<div className="flex items-center justify-center h-full px-8 py-14 bg-green-500">
+				<div className="flex items-center justify-center h-full px-8 py-14 bg-green-700">
 					{testimonials.map((quote, index) => (
 						<div
 							key={quote.title}
@@ -118,35 +118,39 @@ export default function Banner() {
 									{quote.sub}
 								</span>
 								<div className="flex items-center justify-center">
-									<div
+									<a
 										className={`w-6 h-6 mr-6 rounded-full cursor-pointer ${
 											selected === 0
 												? 'bg-white'
 												: 'bg-green-600'
 										}`}
 										onClick={() => setSelected(0)}
+										href="#banner"
 										title="First Testimonial"
 										aria-label="First Testimonial"
 									/>
-									<div
+									<a
 										className={`w-6 h-6 mr-6 rounded-full cursor-pointer ${
 											selected === 1
 												? 'bg-white'
 												: 'bg-green-600'
 										}`}
 										onClick={() => setSelected(1)}
+										href="#banner"
 										title="Second Testimonial"
 										aria-label="Second Testimonial"
 									/>
-									<div
+									<a
 										className={`w-6 h-6 mr-6 rounded-full cursor-pointer ${
 											selected === 2
 												? 'bg-white'
 												: 'bg-green-600'
 										}`}
 										onClick={() => setSelected(2)}
+										href="#banner"
 										title="Third Testimonial"
 										aria-label="Third Testimonial"
+										aria-roledescription=""
 									/>
 								</div>
 							</div>

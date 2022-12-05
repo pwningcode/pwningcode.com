@@ -32,7 +32,7 @@ export default function ProductTable() {
 							<h3 className="text-lg md:text-xl text-white font-semibold">
 								{item.title}
 							</h3>
-							<p className="text-coolGray-300">
+							<p className="text-coolGray-100">
 								{item.description}
 							</p>
 						</div>
@@ -50,7 +50,7 @@ export default function ProductTable() {
 										/>
 									</div>
 								))}
-								<span className="ml-2 font-medium text-coolGray-400">
+								<span className="ml-2 font-medium text-coolGray-50">
 									{item.cost}
 								</span>
 							</div>

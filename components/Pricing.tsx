@@ -27,7 +27,7 @@ export default function Pricing() {
 							className="w-full md:w-1/2 lg:w-1/3 p-4"
 						>
 							<div className="flex flex-col items-center pt-10 px-8 pb-8 bg-white rounded-md shadow-md">
-								<h3 className="mb-4 text-lg md:text-xl text-green-500 font-medium">
+								<h3 className="mb-4 text-lg md:text-xl text-green-700 font-medium">
 									{item.title}
 								</h3>
 								<div className="mb-4">
