@@ -40,6 +40,13 @@ export default function HomePage() {
 					property="og:image"
 					content="https:/pwningcode.com/photo2.png"
 				/>
+				<meta
+					property="og:image:secure_url"
+					content="https:/pwningcode.com/photo2.png"
+				/>
+				<meta property="og:image:type" content="png" />
+				<meta property="og:image:width" content="300" />
+				<meta property="og:image:height" content="329" />
 
 				<link
 					rel="apple-touch-icon"
