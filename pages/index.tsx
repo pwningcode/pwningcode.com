@@ -18,12 +18,29 @@ export default function HomePage() {
 				<title>PwningCode - Jason Barnes - Software Developer</title>
 				<meta
 					name="description"
-					content="Hire a full stack developer for requirements, design, development, web, mobile, and infrastructure."
+					content="Hire a full stack developer for requirements, design, development, web, mobile, and infrastructure using React, React Native, NodeJS, NextJs, Express, TailwindCSS, Material UI, AWS, Vercel &amp; more."
 				/>
 				<meta
 					name="keywords"
 					content="React, React Native, NodeJS, NextJs, Express, TailwindCSS, Material UI, AWS, Vercel"
 				/>
+				<meta property="og:locale" content="en_US" />
+				<meta property="og:type" content="website" />
+				<meta
+					property="og:title"
+					content="PwningCode - Jason Barnes - Software Developer"
+				/>
+				<meta
+					property="og:description"
+					content="Hire a full stack developer for requirements, design, development, web, mobile, and infrastructure using React, React Native, NodeJS, NextJs, Express, TailwindCSS, Material UI, AWS, Vercel &amp; more."
+				/>
+				<meta property="og:url" content="https:/pwningcode.com/" />
+				<meta property="og:site_name" content="PwningCode" />
+				<meta
+					property="og:image"
+					content="https:/pwningcode.com/photo2.png"
+				/>
+
 				<link
 					rel="apple-touch-icon"
 					sizes="180x180"
