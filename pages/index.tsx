@@ -48,6 +48,20 @@ export default function HomePage() {
 				<meta property="og:image:width" content="300" />
 				<meta property="og:image:height" content="329" />
 
+				<meta property="twitter:card" content="summary" />
+				<meta
+					property="twitter:description"
+					content="Hire a full stack developer for requirements, design, development, web, mobile, and infrastructure using React, React Native, NodeJS, NextJs, Express, TailwindCSS, Material UI, AWS, Vercel &amp; more."
+				/>
+				<meta
+					property="twitter:image"
+					content="https:/pwningcode.com/photo2.png"
+				/>
+				<meta
+					property="twitter:title"
+					content="PwningCode - Jason Barnes - Software Developer"
+				/>
+
 				<link
 					rel="apple-touch-icon"
 					sizes="180x180"
