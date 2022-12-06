@@ -15,7 +15,7 @@ export default function HomePage() {
 	return (
 		<>
 			<Head>
-				<title>PwningCode - Jason Barnes - Software Developer</title>
+				<title>Jason Barnes - Your Software Developer</title>
 				<meta
 					name="description"
 					content="Hire a full stack developer for requirements, design, development, web, mobile, and infrastructure using React, React Native, NodeJS, NextJs, Express, TailwindCSS, Material UI, AWS, Vercel &amp; more."
@@ -28,7 +28,7 @@ export default function HomePage() {
 				<meta property="og:type" content="website" />
 				<meta
 					property="og:title"
-					content="PwningCode - Jason Barnes - Software Developer"
+					content="Jason Barnes - Your Software Developer"
 				/>
 				<meta
 					property="og:description"
@@ -38,15 +38,8 @@ export default function HomePage() {
 				<meta property="og:site_name" content="PwningCode" />
 				<meta
 					property="og:image"
-					content="https:/pwningcode.com/photo2.png"
+					content="https:/www.pwningcode.com/og-banner.png"
 				/>
-				<meta
-					property="og:image:secure_url"
-					content="https:/pwningcode.com/photo2.jpg"
-				/>
-				<meta property="og:image:type" content="jpg" />
-				<meta property="og:image:width" content="300" />
-				<meta property="og:image:height" content="329" />
 
 				<meta property="twitter:card" content="summary" />
 				<meta
@@ -55,13 +48,11 @@ export default function HomePage() {
 				/>
 				<meta
 					property="twitter:image"
-					content="https:/pwningcode.com/photo2.jpg"
+					content="https:/www.pwningcode.com/og-banner.png"
 				/>
-				<meta property="twitter:image:width" content="300" />
-				<meta property="twitter:image:height" content="329" />
 				<meta
 					property="twitter:title"
-					content="PwningCode - Jason Barnes - Software Developer"
+					content="Jason Barnes - Your Software Developer"
 				/>
 
 				<link
