@@ -80,6 +80,7 @@ export default function HomePage() {
 				/>
 				<meta name="msapplication-TileColor" content="#ffffff" />
 				<meta name="theme-color" content="#ffffff" />
+				<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 			</Head>
 			<Banner />
 			<Numbers />

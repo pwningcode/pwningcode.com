@@ -6,7 +6,7 @@
 		"dev": "next dev",
 		"clean": "rm -rf .next",
 		"reset": "rm -rf .next node_modules",
-		"build": "yarn clean && next build",
+		"build": "npm run clean && next build",
 		"start": "next start",
 		"lint": "next lint"
 	},
