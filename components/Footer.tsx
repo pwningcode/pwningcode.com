@@ -44,19 +44,34 @@ export default function Footer() {
 
 					</div>
 				</div>
-				<div className="w-full px-4 py-4 mt-1 border-coolGray-700">
-					<p className="mb-9 leading-9 text-white text-sm text-center">
-						<a
-							href="https://www.linkedin.com/in/pwningcode"
-							title="Link to LinkedIn Profile"
-							aria-label="Link to LinkedIn Profile"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="'inline-block m-2 rounded-md py-3 px-4 text-md font-medium leading-6 text-white outline-darkCoolGray-900 bg-darkCoolGray-500 hover:bg-darkCoolGray-600 focus:ring-darkCoolGray-600 focus:ring-2 focus:ring-opacity-50'"
-						>
-							Connect with me on LinkedIn
-						</a>
-					</p>
+				<div className="flex flex-wrap justify-center">
+					<div className="px-4 py-4 mt-1 border-coolGray-700">
+						<p className="mb-9 leading-9 text-white text-sm text-center">
+							<a
+								href="https://mastodon.online/@pwningcode"
+								title="Link to LinkedIn Profile"
+								aria-label="Link to LinkedIn Profile"
+								rel="me"
+								className="'inline-block m-2 rounded-md py-3 px-4 text-md font-medium leading-6 text-white outline-darkCoolGray-900 bg-darkCoolGray-500 hover:bg-darkCoolGray-600 focus:ring-darkCoolGray-600 focus:ring-2 focus:ring-opacity-50'"
+							>
+								Mastodon
+							</a>
+						</p>
+					</div>
+					<div className="px-4 py-4 mt-1 border-coolGray-700">
+						<p className="mb-9 leading-9 text-white text-sm text-center">
+							<a
+								href="https://www.linkedin.com/in/pwningcode"
+								title="Link to LinkedIn Profile"
+								aria-label="Link to LinkedIn Profile"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="'inline-block m-2 rounded-md py-3 px-4 text-md font-medium leading-6 text-white outline-darkCoolGray-900 bg-darkCoolGray-500 hover:bg-darkCoolGray-600 focus:ring-darkCoolGray-600 focus:ring-2 focus:ring-opacity-50'"
+							>
+								LinkedIn
+							</a>
+						</p>
+					</div>
 				</div>
 				<div className="w-full px-4 py-4 mt-20 border-t-2 border-coolGray-700">
 					<p className="mb-9 leading-9 text-white text-sm text-center">
