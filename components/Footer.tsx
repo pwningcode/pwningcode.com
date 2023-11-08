@@ -21,14 +21,16 @@ export default function Footer() {
 					{footer.description}
 				</p>
 				<div className="flex flex-wrap justify-center">
-					<div className="w-full lg:w-1/3 px-4 py-4 flex flex-col justify-center items-center rounded-lg bg-darkCoolGray-600 m-2">
-						<h3 className="text-2xl font-semibold text-coolGray-100 mb-4 pt-4">
+					{/* <div className="w-full lg:w-1/3 px-4 py-4 pb-10 flex flex-col justify-center items-center rounded-lg bg-darkCoolGray-600 m-2">
+						<h3 className="text-2xl font-semibold text-coolGray-100 mb-8 pt-4 whitespace-nowrap">
 							{footer.message}
 						</h3>
-						<div className="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="pwningcode" data-version="v1">
-							<a className="badge-base__link LI-simple-link" href="https://www.linkedin.com/in/pwningcode?trk=profile-badge">Jason Barnes</a>
-						</div>
-					</div>
+						<Button
+							text="LinkedIn"
+							url="https://www.linkedin.com/in/pwningcode"
+							blank
+						/>
+					</div> */}
 					<div className="w-full lg:w-1/3 px-4 py-4 pb-10 flex flex-col justify-center items-center rounded-lg bg-darkCoolGray-600 m-2">
 						<h3 className="text-2xl font-semibold text-coolGray-100 mb-8 pt-4 whitespace-nowrap">
 							{footer.calendar}
@@ -39,7 +41,22 @@ export default function Footer() {
 							url="https://calendly.com/pwningcode/introduction"
 							blank
 						/>
+
 					</div>
+				</div>
+				<div className="w-full px-4 py-4 mt-1 border-coolGray-700">
+					<p className="mb-9 leading-9 text-white text-sm text-center">
+						<a
+							href="https://www.linkedin.com/in/pwningcode"
+							title="Link to LinkedIn Profile"
+							aria-label="Link to LinkedIn Profile"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="'inline-block m-2 rounded-md py-3 px-4 text-md font-medium leading-6 text-white outline-darkCoolGray-900 bg-darkCoolGray-500 hover:bg-darkCoolGray-600 focus:ring-darkCoolGray-600 focus:ring-2 focus:ring-opacity-50'"
+						>
+							Connect with me on LinkedIn
+						</a>
+					</p>
 				</div>
 				<div className="w-full px-4 py-4 mt-20 border-t-2 border-coolGray-700">
 					<p className="mb-9 leading-9 text-white text-sm text-center">

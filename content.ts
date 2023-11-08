@@ -17,6 +17,7 @@ import {
 	mdiMicrosoft,
 	mdiLinux,
 	mdiAndroid,
+	mdiClock,
 } from '@mdi/js';
 
 export const content = {
@@ -153,7 +154,7 @@ export const content = {
 	},
 	pricing: {
 		title: `General Development`,
-		description: `I do not charge hourly. A subscription ensures that I'm always available to handle your requests and provides a no hassle relationship. Pause at any time. Check out the FAQ below or contact me with any questions.`,
+		description: `A subscription ensures that I'm always available to handle your requests and provides a no hassle relationship. Pause at any time. Check out the FAQ below or contact me with any questions.`,
 		items: [
 			{
 				id: 1,
@@ -243,6 +244,15 @@ export const content = {
 					{ icon: mdiCreditCardOutline, color: '#f6f6f6' },
 				],
 			},
+			{
+				id: 6,
+				title: `Hourly`,
+				description: `I do offer fixed pricing for well scoped projects.`,
+				cost: '$100.00/hour',
+				icons: [
+					{ icon: mdiClock, color: '#f6f6f6' },
+				],
+			},
 		],
 	},
 	faq: {
@@ -250,7 +260,7 @@ export const content = {
 		description: ``,
 		items: [
 			{
-				question: 'Do you only sell subscriptions?',
+				question: 'Do you only sell subscriptions? What about hourly?',
 				answer: `I do offer fixed pricing for well scoped projects. Schedule an introduction below and let's talk about it`,
 				size: 24,
 			},

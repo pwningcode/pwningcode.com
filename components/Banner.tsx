@@ -67,7 +67,7 @@ export default function Banner() {
 								>
 									CV
 								</a> */}
-								<Button text="Hire Me" url="#pricing" />
+								<Button text="Hire Me" url="#products" />
 							</p>
 						</div>
 					</div>

@@ -8,6 +8,7 @@ const { productTable } = content;
 export default function ProductTable() {
 	return (
 		<section
+		id="products"
 			className="py-20 xl:pt-24 xl:pb-28 bg-coolGray-900"
 			style={{
 				backgroundImage: 'url("/assets/pattern-dark2.svg")',
