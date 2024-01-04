@@ -23,10 +23,10 @@ export default function Conference() {
 	return (
 		<div className="w-screen h-screen">
 			<JitsiMeeting
-				roomName="introduction-with-jason-barnes"
-				domain="meet.jit.si"
+				roomName="fvcsolutions-jason"
+				domain="meet.accentvoice.com"
 				userInfo={{
-					displayName: 'Guest',
+					displayName: '',
 					email: '',
 				}}
 				interfaceConfigOverwrite={{
