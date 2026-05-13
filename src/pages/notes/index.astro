@@ -40,7 +40,7 @@ const fmt = (d: Date) =>
             {notes.map((note) => (
               <article class="md:grid md:grid-cols-4 md:items-baseline">
                 <Card class="md:col-span-3">
-                  <CardTitle href={`/notes/${note.slug}/`}>
+                  <CardTitle href={`/notes/${note.id}/`}>
                     {note.data.title}
                   </CardTitle>
                   <CardEyebrow

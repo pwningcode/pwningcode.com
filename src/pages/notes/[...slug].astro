@@ -1,12 +1,12 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/Container.astro';
 
 export async function getStaticPaths() {
   const notes = await getCollection('notes', ({ data }) => !data.draft);
   return notes.map((note) => ({
-    params: { slug: note.slug },
+    params: { slug: note.id },
     props: { note },
   }));
 }
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const { note } = Astro.props;
-const { Content } = await note.render();
+const { Content } = await render(note);
 
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-US', {
@@ -24,11 +24,42 @@ const fmt = (d: Date) =>
     month: 'long',
     day: 'numeric',
   });
+
+const canonical = new URL(`/notes/${note.id}/`, Astro.site).href;
+const description = note.data.description ?? note.data.title;
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: note.data.title,
+  description,
+  datePublished: note.data.pubDate.toISOString(),
+  ...(note.data.updatedDate && {
+    dateModified: note.data.updatedDate.toISOString(),
+  }),
+  author: {
+    '@type': 'Person',
+    name: 'Jason Barnes',
+    url: Astro.site?.href,
+  },
+  publisher: {
+    '@type': 'Person',
+    name: 'Jason Barnes',
+    url: Astro.site?.href,
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  url: canonical,
+  keywords: note.data.tags.join(', '),
+};
 ---
 
 <BaseLayout
   title={`${note.data.title} - pwningcode`}
-  description={note.data.description ?? note.data.title}
+  description={description}
+  type="article"
+  publishedTime={note.data.pubDate}
+  modifiedTime={note.data.updatedDate}
+  tags={note.data.tags}
+  jsonLd={articleSchema}
 >
   <Container class="mt-16 lg:mt-32">
     <div class="xl:relative">

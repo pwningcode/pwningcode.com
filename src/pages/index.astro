@@ -44,11 +44,34 @@ const social = [
     label: 'LinkedIn',
   },
 ] as const;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Jason Barnes',
+  alternateName: 'pwningcode',
+  url: 'https://pwningcode.com',
+  jobTitle: 'Solo developer',
+  description:
+    'Builds AI-powered internal tools and document intelligence for small businesses through FVC Solutions.',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'FVC Solutions',
+    url: 'https://fvcsolutions.com',
+  },
+  sameAs: [
+    'https://github.com/pwningcode',
+    'https://www.linkedin.com/in/pwningcode',
+    'https://jasonbarnes.net',
+    'https://fvcsolutions.com',
+  ],
+};
 ---
 
 <BaseLayout
   title="Jason Barnes - pwningcode"
   description="Jason Barnes. Building AI-powered software for small businesses through FVC Solutions, and some side projects."
+  jsonLd={personSchema}
 >
   <Container class="mt-9">
     <div class="max-w-2xl">
@@ -111,7 +134,7 @@ const social = [
           ) : (
             notes.map((note) => (
               <Card as="article">
-                <CardTitle href={`/notes/${note.slug}/`}>
+                <CardTitle href={`/notes/${note.id}/`}>
                   {note.data.title}
                 </CardTitle>
                 <CardEyebrow
