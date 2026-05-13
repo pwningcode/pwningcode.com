@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SimpleLayout from '../../components/SimpleLayout.astro';
+import Card from '../../components/Card.astro';
+import CardTitle from '../../components/CardTitle.astro';
+import CardDescription from '../../components/CardDescription.astro';
+import CardCta from '../../components/CardCta.astro';
+import CardEyebrow from '../../components/CardEyebrow.astro';
+
+const all = await getCollection('notes', ({ data }) => !data.draft);
+const notes = all.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+---
+
+<BaseLayout
+  title="Notes - pwningcode"
+  description="Notes from Jason Barnes. Short, occasional. Things I figured out the hard way."
+>
+  <SimpleLayout
+    title="Things I figured out, posted later."
+    intro="Short, occasional. The work is the point, posts are byproducts. No roundups, no newsletter."
+  >
+    {
+      notes.length === 0 ? (
+        <p class="text-base text-zinc-600 dark:text-zinc-400">
+          Nothing published yet. Drafts in flight.
+        </p>
+      ) : (
+        <div class="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
+          <div class="flex max-w-3xl flex-col space-y-16">
+            {notes.map((note) => (
+              <article class="md:grid md:grid-cols-4 md:items-baseline">
+                <Card class="md:col-span-3">
+                  <CardTitle href={`/notes/${note.slug}/`}>
+                    {note.data.title}
+                  </CardTitle>
+                  <CardEyebrow
+                    as="time"
+                    datetime={note.data.pubDate.toISOString()}
+                    class="md:hidden"
+                    decorate
+                  >
+                    {fmt(note.data.pubDate)}
+                  </CardEyebrow>
+                  <CardDescription>
+                    {note.data.description ?? ''}
+                  </CardDescription>
+                  <CardCta>Read note</CardCta>
+                </Card>
+                <CardEyebrow
+                  as="time"
+                  datetime={note.data.pubDate.toISOString()}
+                  class="mt-1 hidden md:block"
+                >
+                  {fmt(note.data.pubDate)}
+                </CardEyebrow>
+              </article>
+            ))}
+          </div>
+        </div>
+      )
+    }
+  </SimpleLayout>
+</BaseLayout>

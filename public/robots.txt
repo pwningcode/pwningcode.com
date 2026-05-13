@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pwningcode.com/sitemap.xml
+Sitemap: https://pwningcode.com/sitemap-index.xml

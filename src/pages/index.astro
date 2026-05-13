@@ -1,0 +1,243 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/Container.astro';
+import Card from '../components/Card.astro';
+import CardTitle from '../components/CardTitle.astro';
+import CardDescription from '../components/CardDescription.astro';
+import CardCta from '../components/CardCta.astro';
+import CardEyebrow from '../components/CardEyebrow.astro';
+import SocialIcon from '../components/SocialIcons.astro';
+
+const all = await getCollection('notes', ({ data }) => !data.draft);
+const notes = all
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 4);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+const projects = [
+  {
+    name: 'Foreman',
+    status: 'active dev',
+    description:
+      "A Claude Code harness with remote control. Like Linear, except the tickets aren't tasks for humans, they're workflows orchestrated through a Claude Code instance running locally. Prompts and plans are not enough. Claude develops horizontally when left to its own devices. A harness with specialized agents and skills lets you develop in vertical slices across architecture with quick feedback loops.",
+  },
+  {
+    name: 'DownBad',
+    status: 'beta soon',
+    description:
+      "24/7 uptime monitoring with more useful features, $50/year flat. Not per-monitor. Not per-site. Built because we wanted better monitoring for our own stuff. Monitoring shouldn't cost more than the hosting it monitors",
+  },
+];
+
+const social = [
+  { href: 'https://github.com/pwningcode', icon: 'github', label: 'GitHub' },
+  {
+    href: 'https://www.linkedin.com/in/pwningcode',
+    icon: 'linkedin',
+    label: 'LinkedIn',
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Jason Barnes - pwningcode"
+  description="Jason Barnes. Building AI-powered software for small businesses through FVC Solutions, and some side projects."
+>
+  <Container class="mt-9">
+    <div class="max-w-2xl">
+      <h1
+        class="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100"
+      >
+        Building AI-powered software for small businesses.
+      </h1>
+      <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+        Most small businesses don't need another SaaS subscription. They need
+        one well-built internal tool. AI changes what one well-built tool can
+        do. That's what we build at <a
+          href="https://fvcsolutions.com"
+          class="font-medium text-teal-500 hover:text-teal-600 dark:text-teal-400 dark:hover:text-teal-300"
+          >FVC Solutions</a
+        >. Custom internal tools, document intelligence, customer-facing
+        AI, and more.
+      </p>
+      <p class="mt-4 text-base text-zinc-600 dark:text-zinc-400">
+        Currently focused on getting higher quality code out of agents through custom instructions and workflows.
+      </p>
+      <div class="mt-6 flex gap-6">
+        {
+          social.map((s) => (
+            <a
+              href={s.href}
+              aria-label={`Follow on ${s.label}`}
+              class="group -m-1 p-1"
+            >
+              <SocialIcon
+                icon={s.icon}
+                class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
+              />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+
+  <Container class="mt-24 md:mt-28">
+    <div
+      class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2"
+    >
+      <div class="flex flex-col gap-16">
+        <h2 class="sr-only">Recent notes</h2>
+        {
+          notes.length === 0 ? (
+            <div class="text-sm text-zinc-500 dark:text-zinc-400">
+              <p>Nothing published yet. Drafts in flight.</p>
+              <p class="mt-2">
+                <a
+                  href="/notes/"
+                  class="font-medium text-teal-500 hover:text-teal-600 dark:text-teal-400 dark:hover:text-teal-300"
+                >
+                  Browse notes →
+                </a>
+              </p>
+            </div>
+          ) : (
+            notes.map((note) => (
+              <Card as="article">
+                <CardTitle href={`/notes/${note.slug}/`}>
+                  {note.data.title}
+                </CardTitle>
+                <CardEyebrow
+                  as="time"
+                  datetime={note.data.pubDate.toISOString()}
+                  decorate
+                >
+                  {fmt(note.data.pubDate)}
+                </CardEyebrow>
+                <CardDescription>
+                  {note.data.description ?? ''}
+                </CardDescription>
+                <CardCta>Read note</CardCta>
+              </Card>
+            ))
+          )
+        }
+      </div>
+      <div class="space-y-10 lg:pl-16 xl:pl-24">
+        <div
+          class="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
+        >
+          <h2
+            class="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              class="h-6 w-6 flex-none"
+            >
+              <path
+                d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
+                class="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
+              ></path>
+              <path
+                d="M3 14.25h6.249c.484 0 .952-.002 1.316.319l.777.682a.996.996 0 0 0 1.316 0l.777-.682c.364-.32.832-.319 1.316-.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5"
+                class="stroke-zinc-400 dark:stroke-zinc-500"></path>
+            </svg>
+            <span class="ml-3">Projects</span>
+          </h2>
+          <ul class="mt-6 space-y-6">
+            {
+              projects.map((p) => (
+                <li>
+                  <div class="flex items-baseline justify-between gap-3">
+                    <span class="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                      {p.name}
+                    </span>
+                    <span class="text-xs text-teal-600 dark:text-teal-400">
+                      {p.status}
+                    </span>
+                  </div>
+                  <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+                    {p.description}
+                  </p>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div
+          class="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
+        >
+          <h2
+            class="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              class="h-6 w-6 flex-none"
+            >
+              <path
+                d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
+                class="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
+              ></path>
+              <path
+                d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
+                class="stroke-zinc-400 dark:stroke-zinc-500"></path>
+            </svg>
+            <span class="ml-3">Elsewhere</span>
+          </h2>
+          <ul class="mt-6 space-y-4 text-sm">
+            <li class="flex justify-between gap-2">
+              <span class="text-zinc-500 dark:text-zinc-400">GitHub</span>
+              <a
+                href="https://github.com/pwningcode"
+                class="font-medium text-zinc-800 hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-400"
+                >github.com/pwningcode</a
+              >
+            </li>
+            <li class="flex justify-between gap-2">
+              <span class="text-zinc-500 dark:text-zinc-400">LinkedIn</span>
+              <a
+                href="https://www.linkedin.com/in/pwningcode"
+                class="font-medium text-zinc-800 hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-400"
+                >in/pwningcode</a
+              >
+            </li>
+            <li class="flex justify-between gap-2">
+              <span class="text-zinc-500 dark:text-zinc-400">Business</span>
+              <a
+                href="https://fvcsolutions.com"
+                class="font-medium text-zinc-800 hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-400"
+                >fvcsolutions.com</a
+              >
+            </li>
+            <li class="flex justify-between gap-2">
+              <span class="text-zinc-500 dark:text-zinc-400">Field Notes</span>
+              <a
+                href="https://jasonbarnes.net"
+                class="font-medium text-zinc-800 hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-400"
+                >jasonbarnes.net</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </Container>
+</BaseLayout>
