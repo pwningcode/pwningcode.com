@@ -6,33 +6,61 @@ draft: false
 tags: ['claude-code', 'agents', 'foreman']
 ---
 
-I tried plan decomposition. Then I tried decomposition into smaller tasks to keep context small. Then I ran hundreds of tasks overnight expecting to wake up to a working feature. I woke up to a broken repo.
+> 27 iterations to fix 90 distinct method/path combinations. 243 test cases across 19 scenarios. About an hour on Opus 4.7. AFK.
+
+I tried plan decomposition. Then decomposition into smaller tasks to keep context small. Then I ran hundreds of tasks overnight expecting to wake up to a working feature. I woke up to a broken repo.
 
 Prompts and plans are not enough. Not for anything beyond simple changes.
 
-Here's what I think the problem actually is.
+What got me past it: pinning the unit of work to vertical slices, writing acceptance tests as the source of truth, and splitting the agent loop into a context-light orchestrator and a context-heavy fixer. The rest of this post is how that breaks down.
+
+**Contents**
+
+- [Claude develops horizontally](#claude-develops-horizontally)
+- [Vertical slices, with tight feedback](#vertical-slices-with-tight-feedback)
+- [Precondition: you need the patterns first](#precondition-you-need-the-patterns-first)
+- [Step 1: generate the integration tests](#step-1-generate-the-integration-tests)
+- [Step 2: orchestrator and fixer, not one agent](#step-2-orchestrator-and-fixer-not-one-agent)
+- [Results](#results)
+- [What this doesn't fix](#what-this-doesnt-fix)
+- [In summary](#in-summary)
 
 ## Claude develops horizontally
 
-If you plan a feature with Claude it will identify all the bits and bobs across all layers that need to change, outline them for you, and everything will "look" just fine. You approve the plan and the output is not quite what you expected. Claude prefers to code in layers, from the bottom up; the database migrations, the repositories, the services, the API, then the web site, and maybe some unit tests.
+If you plan a feature with Claude it will identify all the bits and bobs across every layer that need to change, outline them for you, and everything will "look" just fine. You approve the plan and the output is not quite what you expected. Claude prefers to code in layers, from the bottom up; the database migrations, the repositories, the services, the API, then the web site, and maybe some unit tests.
+
+This isn't really a Claude bug. Humans do the same thing handed a flat task list without acceptance criteria — we just do it slower and get bored before the damage compounds. Agents don't get bored. They'll happily build the next layer on top of the wrong assumption all night.
 
 I've tried TDD and Integration Tests both. Hundreds of passing tests; in isolation. It looks like progress, except it isn't. It's a thin film of code across the whole feature, with few end-to-end paths that actually work.
 
-The schema is half-right because the API isn't designed yet. The API stubs out features that the UI doesn't need. The UI is wired to endpoints that don't return real data. The tests pass because they assert on the stubs.
+The schema is half-right because the API isn't designed yet. The API stubs out features the UI doesn't need. The UI is wired to endpoints that don't return real data. The tests pass because they assert on the stubs.
 
 This is the horizontal failure mode, and it gets worse the bigger the plan is, the bigger the project, and the bigger the repo. More tasks, more shallow passes, more places where the pieces don't quite line up. You can't fix this with better prompts. The prompt isn't the problem. The unit of work is.
 
 ## Vertical slices, with tight feedback
 
-So, my latest interation to address this issue is to concentrate my planning on acceptance tests of vertical slices and have Claude iterate until the acceptance tests pass.
+My latest iteration is to concentrate planning on acceptance tests of vertical slices and have Claude iterate until those acceptance tests pass.
 
 The idea is to have Claude (or sub-agents) concentrate on a single route from top to bottom instead of bottom up. I spent a lot of time mocking up the web UI and I wanted the data contracts that drive the UI to be the source of truth.
 
 The trick is enforcing the slicing. Claude will not slice on its own. Asked to build a feature, it will spread wide every time. You have to constrain it.
 
-## What I've done so far
+## Precondition: you need the patterns first
 
-Well in this case, I already had patterns in place in the architecture (from hours and hours of semi-successful prompting) which allowed me to just prompt Claude to generate the integration tests suite. This was my original prompt:
+A caveat that's load-bearing enough to deserve its own heading: this only worked because I already had architectural patterns in place from hours and hours of semi-successful prompting. Feature-based monorepo boundaries, Zod contracts as the single source of validation, the `apps/web → libs/web-api-client → apps/web-api → DB` shape locked in.
+
+Without that, Claude would generate integration tests that encode the wrong contracts, and the fixer loop would ratchet you toward the wrong design — fast and confidently. The integration tests are only a useful spec when the shape they're encoding is already roughly right.
+
+If your project is greenfield, do this in a smaller scope first: build one feature horizontally and slowly, then use that as the pattern Claude generates tests against. `// TODO: Make a skill for this`
+
+## Step 1: generate the integration tests
+
+I prompted Claude to scour the web UI and generate the integration test suite. The shape of the prompt: import the real `web-api-client`, no mocks, one test per route + method, scenarios that chain (add → update → delete) so the DB state composes, output a machine-readable `last-run.json` for the orchestrator to read later. Full prompt below if it's useful.
+
+> The UI's request/response contracts are the source of truth. The tests assert what a real user gets, with no mocks in the middle.
+
+<details>
+<summary>Full prompt — generate the suite</summary>
 
 ```markdown
 I would like us to create an integration test suite specificly towards exercising the "apps/web <-> apps/web-api-client <-> apps/web-api <-> database" vertical to ensure that ALL expectations are met from the apps/web UI perspective. The request/response contracts consumed by the web app are the source of truth.
@@ -62,13 +90,26 @@ Don't:
 - don't reference any other NX projects that are not the source of truth
 ```
 
-Once the integration tests were written; they all failed - kindof.
+</details>
 
-Turns out there are gotchas with integration tests (I know this, but forgot to itemize in my prompts). I am importing the web-api-client so that I can consume the system as it is intended. No mocks. The middleware I had in place actually worked - RATE_LIMIT_EXCEEDED. So at least that works. Ha ha. I also forgot to consider bootstrapping the data (special seeds for integration test data) and authentication (seed a special user with known password/token).
 
-Once I got past these I was in business. I wanted to go AFK and have Claude fix all the integration tests. So I had Claude create two agents. One to orchestrate and one to fix.
+Once the tests were written, they all failed — kind of. Gotchas I forgot to itemize up front: rate-limit middleware tripping on the test runner (good, that meant the middleware worked), no seed data, no test user with a known password/token. Once those were in, I was in business.
 
-The orchestrator:
+## Step 2: orchestrator and fixer, not one agent
+
+This is the real meat and potatoes. To go AFK, I split the work into two agents:
+
+- **The orchestrator** never reads source files. Its entire view of the world is the `summary` block and failing test names from `last-run.json` (read through a narrow `jq` slice) and a running in-context log with three sections: baseline, fixed, parked. Each iteration it spawns one sub-agent, reads back a ~200-word structured summary, and updates the log.
+- **The fixer** runs in a fresh context per iteration. It reads the skill file, picks one failing test, traces it through allowed-scope code only (`web-api-client`, `web-api-contracts`, `web-api`), makes the minimal change, re-runs the suite, and exits with a structured summary.
+
+The reason this works is that the orchestrator's context window stays tiny. It never sees test output, never sees source files, never accumulates the state of 27 iterations of debugging. That state lives in the log it maintains, which is intentionally small. The fixers burn context on the work and throw it away. You get coherence without long-context degradation.
+
+> Long contexts rot. Fresh fixer per iteration, orchestrator stays small. That's the whole trick.
+
+Both prompts are below.
+
+<details>
+<summary>Orchestrator prompt</summary>
 
 ```markdown
 # Fix Web Integration Tests — Orchestrator
@@ -265,10 +306,12 @@ orchestrator (this prompt)
 
 That's it. Start by reading the skill file, run the baseline suite, and
 begin the loop.
-
 ```
 
-And the fixer:
+</details>
+
+<details>
+<summary>Fixer prompt</summary>
 
 ```markdown
 # Fix Web Integration Test Expectations
@@ -468,36 +511,32 @@ When you finish, produce one consolidated end-of-run report containing:
   `summary.skipped` from `last-run.json`.
 
 Do not surface the parked list mid-run. One report, at the end.
-
 ```
+
+</details>
 
 Then I just ask Claude to run the orchestrator while I'm AFK.
 
-## The results
+## Results
 
-At first there were gaps of missing routes - a quick "code review" session of the test suite identified this (good practice anyway - always from a separate/clean session).
+First gap was missing routes — a quick "code review" session of the test suite in a clean session caught it. Always review the generated tests from a separate context; don't let the agent that wrote them grade its own work.
 
-It took the orchestrator a total of 27 iterations to fix 90 distinct method/path combinations. 243 test cases across 19 scenarios. This only took an hour or so using Opus 4.7.
+The orchestrator took 27 iterations to fix 90 distinct method/path combinations across 243 test cases in 19 scenarios. About an hour on Opus 4.7. From prompt-fixing never-ending UI ↔ API bugs to every endpoint working.
 
-This took me from prompt-fixing never-ending UI<->API bugs to every endpoint working. WOW!
+## What this doesn't fix
 
-## What needs improved
+Vertical slices with acceptance tests proved to be pretty powerfull. They are not the whole job. Other things to consider though:
 
-The vertical slice / integration test method got me a long way but there are other things to consider:
+- **Cross-slice drift.** Each slice green, A + B + C broken. Slices are the right unit for *building*; they're a terrible unit for noticing that the whole system is rotting one passing test at a time. You still need someone (or something) reading across slices for coherence. Maybe some use-case based integration tests or stress tests would help.
+- **Security-by-absence.** The tests assert intended behavior. They do not assert the absence of unintended behavior — auth bypass, IDOR, SQL injection, plan-gating side doors. An agent following acceptance tests will happily ship a working feature with an open door next to it.
+- **The unsaid.** The agent builds what's specified. If idempotency isn't in the spec, it isn't in the code. If retries aren't in the spec, neither is backoff. Acceptance tests encode requirements, not the absence of foot-guns.
 
-- Performance — N+1s, slow queries, memory growth, pool exhaustion. Green in test, dead under load (stress tests needed).
-- Concurrency and partial failure — races, deadlocks, lost updates, half-committed work across DB + queue.
-- Security — auth bypass, IDOR, SQL injection, plan-gating side doors. Tests check intended behavior, not its absence.
-- Time bugs — TZ, DST, cert expiry, drift, clock skew.
-- Cross-slice drift — each slice green, A + B + C broken. Architectural rot, one passing test at a time.
-- Observability — logs, metrics, traces, runbooks. Correct but uninvestigable.
-- Migrations and deploys — table locks, data loss, rolling-deploy breakage.
-- The unsaid — agent only builds what's specified. No idempotency in spec, no idempotency in code.
+The rest of the usual suspects — performance under load, concurrency, time bugs, observability, migration safety — still apply. Vertical slicing is orthogonal to all of them.
 
-I still have issues in the UI as well. Saving data is not returning back on fresh queries (I have to look into this)
+I also still have UI bugs. Saving data isn't returning on fresh queries; I have to look into it.
 
-Moving forward I will solidify some architectual skills for the agents to reference and add references to my CLAUDE.md files so that planning concentrates on Integration Tests rather than implementations.
+Next: solidify some architectural skills for the agents to reference and add them to my `CLAUDE.md` files, so feature planning starts from "what's the acceptance test" rather than "what files do we touch."
 
-## In Summary
+## In summary
 
-The idea is solid. Prompts get you started. Plans get you a sketch. Agents and skills, sliced vertically with fast feedback, get you higher quality code - so far.
+Prompts get you started. Plans get you a sketch. Agents and skills, sliced vertically with fast feedback and a context-light coordinator, get you working code. So far.
