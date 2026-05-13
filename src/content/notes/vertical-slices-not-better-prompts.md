@@ -1,5 +1,5 @@
 ---
-title: 'Prompts and plans are not enough'
+title: 'Vertical slices, not better prompts'
 description: "What I learned running hundreds of Claude Code tasks overnight, breaking everything, and why vertical integration tests got me further."
 pubDate: 2026-05-13
 draft: false
