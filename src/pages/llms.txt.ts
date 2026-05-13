@@ -9,7 +9,7 @@ export async function GET(context: APIContext) {
   const lines = [
     '# pwningcode',
     '',
-    '> Notes from Jason Barnes — solo developer in Ohio building AI-powered software for small businesses through FVC Solutions. Active side projects: Foreman (a Claude Code harness with remote control) and DownBad (uptime monitoring, $50/year flat).',
+    '> Notes from Jason Barnes — solo developer building AI-powered software for small businesses through FVC Solutions. Active side projects: Foreman (a Claude Code harness with remote control) and DownBad (uptime monitoring, $50/year flat).',
     '',
     '## About',
     '',

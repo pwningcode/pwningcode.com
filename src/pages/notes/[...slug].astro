@@ -55,6 +55,7 @@ const articleSchema = {
 <BaseLayout
   title={`${note.data.title} - pwningcode`}
   description={description}
+  ogImage={note.data.cover?.image ?? `/og/${note.id}.png`}
   type="article"
   publishedTime={note.data.pubDate}
   modifiedTime={note.data.updatedDate}

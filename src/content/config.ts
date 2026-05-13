@@ -10,6 +10,16 @@ const notes = defineCollection({
     updatedDate: z.coerce.date().optional(),
     draft: z.boolean().default(false),
     tags: z.array(z.string()).default([]),
+    cover: z
+      .object({
+        stats: z.array(z.string()).max(4).optional(),
+        pull: z.string().max(120).optional(),
+        image: z.string().optional(),
+      })
+      .refine((c) => !(c.stats && c.pull), {
+        message: 'cover.stats and cover.pull are mutually exclusive',
+      })
+      .optional(),
   }),
 });
 

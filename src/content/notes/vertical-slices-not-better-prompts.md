@@ -4,6 +4,12 @@ description: "What I learned running hundreds of Claude Code tasks overnight, br
 pubDate: 2026-05-13
 draft: false
 tags: ['claude-code', 'agents', 'foreman']
+cover:
+  stats:
+    - "27 iterations"
+    - "90 endpoints fixed"
+    - "243 tests · 19 scenarios"
+    - "~1hr on Opus 4.7, AFK"
 ---
 
 > 27 iterations to fix 90 distinct method/path combinations. 243 test cases across 19 scenarios. About an hour on Opus 4.7. AFK.
