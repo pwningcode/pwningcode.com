@@ -5,10 +5,10 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://pwningcode.com',
-  trailingSlash: 'ignore',
+  trailingSlash: 'always',
   redirects: {
-    '/notes/prompts-and-plans-are-not-enough':
-      '/notes/vertical-slices-not-better-prompts',
+    '/notes/prompts-and-plans-are-not-enough/':
+      '/notes/vertical-slices-not-better-prompts/',
   },
   build: {
     inlineStylesheets: 'always',
